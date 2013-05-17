@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Inputs</title>
+  <script type="text/javascript" src="/js/jquery-1.7.2.js"></script>
+  <script type="text/javascript" src="/js/jquery-ui-1.8.23.custom.min.js"></script>
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Ubuntu:400,700,,500,400italic|Ubuntu+Mono" type="text/css">
+  <link rel="stylesheet" href="http://www.linaro.org/css/site/init.css" type="text/css">
+  <link rel="stylesheet" href="http://www.linaro.org/css/site/styles.css?v=5.0" type="text/css">
+  <link rel="stylesheet" type="text/css" href="/css/jquery-ui/jquery-ui-1.8.23.custom.css" />
+  <link rel="stylesheet" type="text/css" href="/css/linaro.css" />
+  <meta http-equiv="refresh" content="2016" >
+</head>
+<body>
+{% if emails|length %}
+  <h1>Unread Mail</h1>
+  <table>
+  {% for id, mail in emails.items %}
+    <tr>
+      <td><a href="{{ mail.1 }}">{{ mail.0 }}</a></td>
+    </tr>
+  {% endfor %}
+  </table>
+{% endif %}
+
+<h1>Blueprints</h1>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Priority</th>
+    <th>Definition Status</th>
+    <th>Implementation Status</th>
+  </tr>
+{% for bp in lp_bp %}
+  <tr>
+    <td><a href="{{ bp.url }}">{{ bp.name }}</a></td>
+    <td>{{ bp.priority }}</td>
+    <td>{{ bp.definition_status }}</td>
+    <td>{{ bp.implementation_status }}</td>
+  </tr>
+  <tr>
+    <td colspan="4">
+      <table>
+        {% for wi in bp.work_items %}
+        <tr>
+          <td class="indent">{{ wi.1 }}</td>
+          <td>{{ wi.0 }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </td>
+  </tr>
+{% endfor %}
+</table>
+
+<h1>Bugs</h1>
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Target</th>
+    <th>Importance</th>
+    <th>Status</th>
+  </tr>
+{% for bug in lp_bugs %}
+  <tr>
+    <td><a href="{{ bug.url }}">{{ bug.title }}</a></td>
+    <td>{{ bug.target }}</td>
+    <td>{{ bug.importance }}</td>
+    <td>{{ bug.status }}</td>
+  </tr>
+{% endfor %}
+</table>
+
+{% if reviews|length %}
+  <h1>Pending Reviews</h1>
+  <table>
+  {% for thing in reviews %}
+    <tr>
+      <td><a href="{{ thing }}">{{ thing }}</a></td>
+    </tr>
+  {% endfor %}
+  </table>
+{% endif %}
+
+{% if merge_proposals|length %}
+  <h1>Pending Merges</h1>
+  <table>
+  {% for thing in merge_proposals %}
+    <tr>
+      <td><a href="{{ thing }}">{{ thing }}</a></td>
+    </tr>
+  {% endfor %}
+  </table>
+{% endif %}
+
+<h1>Cards</h1>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Status</th>
+    <th>Priority</th>
+    <th>Fix Versions</th>
+  </tr>
+{% for card in jira_cards %}
+  <tr>
+    <td><a href="{{ card.url }}">{{ card.name }}</a></td>
+    <td>{{ card.status }}</td>
+    <td>{{ card.priority }}</td>
+    <td>{{ card.fix_versions }}</td>
+  </tr>
+{% endfor %}
+</table>
+</body>
+</html>
