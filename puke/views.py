@@ -133,5 +133,6 @@ def home(request):
             "jira_cards": cards,
             "reviews": reviews,
             "merge_proposals": merge_proposals,
-            "emails": threads
+            "emails": threads,
+            "calendar": settings.CAL_EMBED
         })
