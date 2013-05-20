@@ -130,7 +130,7 @@ def home(request):
 
     # Cards
     jira_cards = requests.get(
-        "http://cards.linaro.org/rest/api/2/search?jql=assignee=%s" %
+        "http://cards.linaro.org/rest/api/2/search?jql=assignee='%s'" %
         settings.JIRA_LOGIN[0], auth=settings.JIRA_LOGIN)
 
     cards = []
